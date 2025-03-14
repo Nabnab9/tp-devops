@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de Devinette</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col items-center justify-center h-screen bg-gray-100">
+<h1 class="text-2xl font-bold mb-4">Devinez le Nombre</h1>
+<input id="userInput" type="number" placeholder="Entrez un nombre" class="border p-2 mb-2">
+<div class="flex items-center justify-center space-x-4">
+    <button id="btn" class="bg-blue-500 text-white px-4 py-2 rounded">Deviner</button>
+    <button id="btnRestart" class="bg-red-500 text-white px-4 py-2 rounded">Recommencer</button>
+</div>
+<p id="message" class="mt-4 text-lg"></p>
+<script src="script.js"></script>
+</body>
+</html>
