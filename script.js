@@ -25,22 +25,8 @@ function play() {
         attempts++;
 
         let guessStatus = getGuessStatus(userGuess);
+        setMessageText(guessStatus.message);
 
-        if (guessStatus.result === INVALID) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === CORRECT) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === TOO_HIGH) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === TOO_LOW) {
-            setMessageText(guessStatus.message);
-        }
     }, 200);
 
 }
