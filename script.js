@@ -2,6 +2,9 @@ const TOO_HIGH = "TOO_HIGH";
 const TOO_LOW = "TOO_LOW";
 const CORRECT = "CORRECT";
 const INVALID = "INVALID";
+const MAX_ATTEMPTS_REACHED = "MAX_ATTEMPTS_REACHED";
+
+const MAX_ATTEMPTS = 10;
 
 let randomNumber = 0;
 let attempts = 0;
@@ -22,10 +25,13 @@ function play() {
     setTimeout(() => {
         const userInput = document.getElementById("userInput").value;
         const userGuess = parseInt(userInput);
-        attempts++;
 
         let guessStatus = getGuessStatus(userGuess);
         setMessageText(guessStatus.message);
+
+        if(guessStatus.result === CORRECT || guessStatus.result === MAX_ATTEMPTS_REACHED) {
+            document.getElementById("btn").disabled = true;
+        }
 
     }, 200);
 
@@ -42,6 +48,15 @@ function getGuessStatus(userGuess) {
             "message": "Veuillez entrer un nombre valide entre 1 et 100."
         };
     }
+
+    attempts++;
+    if (attempts >= MAX_ATTEMPTS) {
+        return {
+            "result": MAX_ATTEMPTS_REACHED,
+            "message": `Perdu ! Le nombre était ${randomNumber}.`
+        };
+    }
+
     if (userGuess === randomNumber) {
         return {
             "result": CORRECT,
@@ -71,4 +86,5 @@ function resetGame() {
     attempts = 0;
     setMessageText("Nouveau jeu. Entrez un nombre entre 1 et 100.");
     document.getElementById("userInput").value = "";
+    document.getElementById("btn").disabled = false;
 }
