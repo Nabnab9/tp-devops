@@ -5,6 +5,7 @@ const INVALID = "INVALID";
 
 let randomNumber = 0;
 let attempts = 0;
+let historique = [];
 
 resetGame();
 
@@ -25,22 +26,8 @@ function play() {
         attempts++;
 
         let guessStatus = getGuessStatus(userGuess);
+         updateHistory(guessStatus);
 
-        if (guessStatus.result === INVALID) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === CORRECT) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === TOO_HIGH) {
-            setMessageText(guessStatus.message);
-        }
-
-        if (guessStatus.result === TOO_LOW) {
-            setMessageText(guessStatus.message);
-        }
     }, 200);
 
 }
@@ -53,25 +40,29 @@ function getGuessStatus(userGuess) {
     if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
         return {
             "result": INVALID,
-            "message": "Veuillez entrer un nombre valide entre 1 et 100."
+            "message": "Veuillez entrer un nombre valide entre 1 et 100.",
+            "guess": userGuess
         };
     }
     if (userGuess === randomNumber) {
         return {
             "result": CORRECT,
-            "message": `Bravo ! Vous avez trouvé en ${attempts} essais.`
+            "message": `Bravo ! Vous avez trouvé en ${attempts} essais.`,
+            "guess": userGuess
         };
     }
     if (userGuess > randomNumber) {
         return {
             "result": TOO_HIGH,
-            "message": "Trop haut ! Essayez encore."
+            "message": "Trop haut ! Essayez encore.",
+            "guess": userGuess
         };
     }
 
     return {
         "result": TOO_LOW,
-        "message": "Trop bas ! Essayez encore."
+        "message": "Trop bas ! Essayez encore.",
+        "guess": userGuess
     };
 }
 
@@ -85,4 +76,21 @@ function resetGame() {
     attempts = 0;
     setMessageText("Nouveau jeu. Entrez un nombre entre 1 et 100.");
     document.getElementById("userInput").value = "";
+    historique = [];
+    updateHistory();
+}
+
+function updateHistory(guessStatus) {
+
+    if(guessStatus) {
+        historique.push(guessStatus);
+    }
+
+    let historyElement = document.getElementById("historique");
+    if (!historyElement) {
+        historyElement = document.createElement("ul");
+        historyElement.id = "historique";
+        document.body.appendChild(historyElement);
+    }
+    historyElement.innerHTML = historique.map(ug => `<li>${ug.guess} - ${ug.message}</li>`).join('');
 }
