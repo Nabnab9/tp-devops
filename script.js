@@ -72,3 +72,7 @@ function resetGame() {
     setMessageText("Nouveau jeu. Entrez un nombre entre 1 et 100.");
     document.getElementById("userInput").value = "";
 }
+
+if (typeof module !== "undefined") {
+    module.exports = { getGuessStatus, CORRECT, TOO_HIGH, TOO_LOW, INVALID };
+}

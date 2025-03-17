@@ -1,0 +1,22 @@
+{
+  "name": "tp-devops",
+  "version": "1.0.0",
+  "description": "Template TP devops ENSIM",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nabnab9/tp-devops.git"
+  },
+  "author": "alban.rousseau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nabnab9/tp-devops/issues"
+  },
+  "homepage": "https://github.com/Nabnab9/tp-devops#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
