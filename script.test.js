@@ -1,6 +1,17 @@
-const { getGuessStatus, CORRECT, TOO_HIGH, TOO_LOW, INVALID, MAX_ATTEMPTS_REACHED } = require('./script');
+const fs = require('fs');
+const path = require('path');
+const html = fs.readFileSync(path.resolve(__dirname, './index.html'), 'utf8');
+
+const { getGuessStatus, CORRECT, TOO_HIGH, TOO_LOW, INVALID, MAX_ATTEMPTS_REACHED } = require('./script.js');
+
+jest.dontMock('fs');
+
+
 
 describe('getGuessStatus', () => {
+    beforeEach(() => {
+        document.body.innerHTML = html.toString();
+    });
     test('devrait retourner INVALID pour une entrée non valide', () => {
         expect(getGuessStatus("abc")).toEqual({ result: INVALID, message: "Veuillez entrer un nombre valide entre 1 et 100." });
         expect(getGuessStatus(0)).toEqual({ result: INVALID, message: "Veuillez entrer un nombre valide entre 1 et 100." });
