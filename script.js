@@ -6,14 +6,24 @@ const INVALID = "INVALID";
 let randomNumber = 0;
 let attempts = 0;
 
-resetGame();
+function setInitialState(newRandomNumber, newAttempts) {
+    randomNumber = newRandomNumber;
+    attempts = newAttempts;
+}
 
-document.getElementById("btn").addEventListener("click", play);
-document.getElementById("userInput").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        play();
-    }
-});
+function init() {
+    startGame();
+
+    document.getElementById("btn").addEventListener("click", play);
+    document.getElementById("userInput").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            play();
+        }
+    });
+    document.getElementById("btnRestart").addEventListener("click", function () {
+        startGame();
+    });
+}
 
 function play() {
     setMessageText("");
@@ -31,9 +41,6 @@ function play() {
 
 }
 
-document.getElementById("btnRestart").addEventListener("click", function () {
-    resetGame();
-});
 
 function getGuessStatus(userGuess) {
     if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
@@ -65,14 +72,18 @@ function setMessageText(buttonText) {
     document.getElementById("message").textContent = buttonText;
 }
 
-function resetGame() {
-    randomNumber = Math.floor(Math.random() * 100) + 1;
-    console.log(`Le nombre aléatoire est : ${randomNumber}`);
-    attempts = 0;
+function startGame() {
+    let newRandomNumber = Math.floor(Math.random() * 100) + 1;
+    console.log(`Le nombre aléatoire est : ${newRandomNumber}`);
+    setInitialState(newRandomNumber, 0);
     setMessageText("Nouveau jeu. Entrez un nombre entre 1 et 100.");
     document.getElementById("userInput").value = "";
 }
 
+if (typeof window !== "undefined" && (typeof process === "undefined" || process.env.JEST_WORKER_ID === undefined)) {
+    init();
+}
+
 if (typeof module !== "undefined") {
-    module.exports = { getGuessStatus, CORRECT, TOO_HIGH, TOO_LOW, INVALID };
+    module.exports = {getGuessStatus, setInitialState, CORRECT, TOO_HIGH, TOO_LOW, INVALID};
 }
