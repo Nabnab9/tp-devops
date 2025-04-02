@@ -1,4 +1,4 @@
-const { getGuessStatus, setInitialState, CORRECT, TOO_HIGH, TOO_LOW, INVALID } = require('./script.js');
+const { getGuessStatus, setInitialState, CORRECT, TOO_HIGH, TOO_LOW, INVALID } = require('./public/script.js');
 
 setInitialState(50, 0);
 describe('getGuessStatus', () => {

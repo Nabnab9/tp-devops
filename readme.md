@@ -1,7 +1,11 @@
-### Cours DevOps
+### Exemple de projet node avec quelques tests
 
-Se rendre sur le cours situé à [ cette adresse](https://docs.google.com/document/d/1onLPS9mSJcLdPYtksek8hSVGec_Cfu8vVH71lXUOfL8/edit?usp=sharing) 
+Installer les dépendances :
+```bash
+npm install
+```
+Lancer les tests :
+```bash
+npm test
+```
 
-TP1 : Git
-TP2 : Docker
-TP3 : CI/CD
