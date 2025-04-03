@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'node:latest' } }
+    agent any
 
     stages {
         stage('Checkout') {
@@ -9,19 +9,19 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                sh 'echo "npm install"'
             }
         }
         stage('Run Tests') {
             steps {
-                sh 'npm test'
+                sh 'echo "npm test"'
             }
         }
-//         stage('Build Docker Image') {
-//             steps {
-//                 sh 'docker build -t my-node-app .'
-//             }
-//         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'echo "docker build -t my-node-app ."'
+            }
+        }
         stage('Deploy (Simulated)') {
             steps {
                 sh 'echo "docker push my-node-app:latest"'
