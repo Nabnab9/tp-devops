@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-prlmifemhfogress: false
 
 jobs:
   deploy:
